@@ -1,7 +1,8 @@
 {
   "scripts": {
-    "start": "tsc && node dist/index.js",
-    "dev": "npx tsc -w"
+    "start": "webpack serve --mode development --open",
+  "build": "webpack --mode production",
+    "lint": "npx eslint --ext .ts src/"
   },
   "name": "rxjs-immutable-exercises",
   "version": "1.0.0",
@@ -17,7 +18,12 @@
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
     "eslint": "^8.39.0",
+    "html-webpack-plugin": "^5.5.1",
     "prettier": "^2.8.8",
-    "typescript": "^5.0.4"
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.4",
+    "webpack": "^5.81.0",
+    "webpack-cli": "^5.0.2",
+    "webpack-dev-server": "^4.13.3"
   }
 }
