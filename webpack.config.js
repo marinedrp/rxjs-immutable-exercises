@@ -1,9 +1,12 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.ts",
+  entry: {
+    index: "./src/index.ts",
+    immutable: "./src/immutable.ts",
+  },
   output: {
-    filename: "bundle.js",
+    filename: "[name].bundle.js",
     path: __dirname + "/dist",
   },
   resolve: {

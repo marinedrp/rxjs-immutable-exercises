@@ -1,19 +1,22 @@
 // import { Observable } from 'rxjs';
-import { of } from 'rxjs/observable/of';
-import { from } from 'rxjs/observable/from';
 import { defer } from 'rxjs/observable/defer';
+import { of } from 'rxjs/observable/of';
+import { _throw } from 'rxjs/observable/throw';
+import { retry } from 'rxjs/operators';
 
-const data = ['A', 'B', 'C'];
+const fetchData = () => {
+  const isSuccess = Math.random() > 0.5;
 
-const of$ = of(data);
-const from$ = from(data);
-const defer$ = defer(() => of(data));
+  if (isSuccess) {
+    return of('Fetched data successfully');
+  } else {
+    return _throw('Error: Failed to fetch data');
+  }
+};
 
-console.log('--- OF ---');
-of$.subscribe((value) => console.log(value));
+const fetchData$ = defer(fetchData).pipe(retry(2));
 
-console.log('--- FROM ---');
-from$.subscribe((value) => console.log(value));
-
-console.log('--- DEFER ---');
-defer$.subscribe((value) => console.log(value));
+fetchData$.subscribe(
+  (data) => console.log('Data:', data),
+  (error) => console.error('Error:', error)
+);
